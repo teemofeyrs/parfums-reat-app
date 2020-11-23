@@ -1,13 +1,217 @@
-body {
+
+html
+{
+  font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem*/
+  max-width: 100vw;
+}
+body
+{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  height: 100vh;
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#root
+{
+  height: 100%;
+  width: 100%;
+}
+.grid-container
+{
+  display: grid;
+  grid-template-areas: 'header'
+                        'main'
+                        'footer';
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr 5rem;
+  height: 100%;
+  width: 100%;
+}
+header
+{
+  width: 100%;
+  grid-area: header;
+  background-color: #203040;
+}
+main
+{
+  width: 100%;
+  grid-area: main;
+}
+footer
+{
+  width: 100%;
+  grid-area: footer;
+  background-color: #203040;
+}
+/*header*/
+header a{
+  color: #ffffff;
+  padding: 1rem;
+}
+header a:hover
+{
+  text-decoration: none;
+  color: #f3a428;
+}
+.brand
+{
+  font-weight: bold;
+  font-size: 3rem;
+  cursor: pointer;
+}
+.brand:hover
+{
+  font-size: 3rem;
+  cursor: pointer;
+}
+/*footer*/
+footer span
+{
+  color: #ffffff;
+}
+/* common*/
+h1
+{
+  font-size: 1.8rem;
+}
+h1
+{
+  font-size: 1.4rem;
+}
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li{
+  margin-top: 1rem;
+  list-style: none;
+}
+a{
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #203040;
+  cursor: pointer;
+}
+a:hover
+{
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #f3a428;
+  cursor: pointer;
+}
+button
+{
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #a4a4a4;
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+button:hover
+{
+  border: 0.1rem solid #404040;
+}
+button.primary
+{
+  background-color: #f0c040
+}
+button.block
+{
+  width: 100%;
+}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.row
+{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.row.center
+{
+  justify-content: center;
+}
+.row.top
+{
+  align-items: flex-start;
+}
+.col-1
+{
+  flex: 1 1 25rem;
+}
+.col-2
+{
+  flex: 2 1 50rem;
+}
+
+img
+{
+  border-radius: 0.5rem;
+  height: 430px;
+  width: 100%;
+}
+img.large
+{
+  max-width: 49rem;
+  width: 100%;
+}
+img.medium
+{
+  max-width: 29rem;
+  width: 100%;
+}
+/*products*/
+
+.product{
+  border: 1px solid #c0c0c0;
+  background-color: #f8f8f8f8;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+.product-body
+{
+  padding: 1rem;
+}
+.product-body > *
+{
+  margin-bottom: 0.5rem;
+}
+.rating span{
+  color: #f0c040;
+  margin-right: 0.1rem;
+}
+.price
+{
+  font-size: 2rem;
+}
+
+/* cart*/
+
+.cart
+{
+  padding: 1rem;
+  border: 1px solid #c0c0c0;
+  background-color: #f8f8f8f8;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+
+/* alert */
+.success
+{
+  color: #20a020;
+}
+.error
+{
+  color: #a02020;
 }
