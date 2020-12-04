@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {addToCart} from "../redux/reducers/cartReducer";
+import {addToCart, removeFromCart} from "../redux/reducers/cartReducer";
 import {useDispatch, useSelector} from "react-redux";
 import MessageBox from "../components/MessageBox";
 import {Link} from "react-router-dom";
@@ -10,7 +10,12 @@ const CartScreen = (props) => {
     const dispatch = useDispatch();
     const cart = useSelector(state => (state.cart))
     const {cartItems} = cart;
-
+    const onDeleteCartHandler = (id) => {
+        dispatch(removeFromCart(id))
+    }
+    const checkoutHandler = () => {
+        props.history.push('signin?redirect=shipping')
+    }
     useEffect(()=>{
         if(productId){
             dispatch(addToCart(productId, qty))
@@ -32,14 +37,21 @@ const CartScreen = (props) => {
                                                 <img className='small' src={item.image} alt={item.name}/>
                                             </div>
                                             <div className='min-30'>
-                                                <Link to={`product/${item.product}`}>{item.name}</Link>
+                                                <Link to={`/product/${item.product}`}>{item.name}</Link>
                                             </div>
                                             <div>
-                                                <select value={item.qty} onChange={(e) => (addToCart(item.product, e.target.value))} id="">
+                                                <select value={item.qty} onChange={(e) =>
+                                                    (dispatch(addToCart(item.product, Number(e.target.value))))} >
                                                     {[...Array(10).keys()].map(value => (
                                                         <option key={value+1} value={value+1} >{value+1}</option>
                                                     ))}
                                                 </select>
+                                            </div>
+                                            <div>
+                                                <p>Цена: {item.price}</p>
+                                            </div>
+                                            <div>
+                                                <button onClick={()=> { onDeleteCartHandler(item.product)}}>Удалить</button>
                                             </div>
                                         </div>
                                     </li>
@@ -48,6 +60,23 @@ const CartScreen = (props) => {
                             </ul>
                     )
                     }
+        </div>
+        <div className='col-1'>
+            <div className='cart cart-body'>
+                <ul>
+                    <li>
+                        <h2>Общее количество : {cartItems.reduce((a , c) => a + c.qty , 0)} шт.</h2>
+                    </li>
+                    <li>
+                        <h2>Общее сумма : {cartItems.reduce((a , c) => a + c.price * c.qty , 0)} грн.</h2>
+                    </li>
+                    <li>
+                        <button type='button' className='primary block' onClick={checkoutHandler} disabled={cartItems.length === 0}>
+                            Оформить заказ
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
         </div>
     );

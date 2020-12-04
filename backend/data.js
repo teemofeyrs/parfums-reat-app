@@ -1,4 +1,26 @@
- const data = {
+import bcrypt from "bcrypt";
+
+const data = {
+    users : [
+        {
+            name:'Artem',
+            email: 'artem.shmatchenko.dev@gmail.com',
+            password: bcrypt.hashSync('Artem12447122', 8),
+            isAdmin: true
+        },
+        {
+            name:'Alina',
+            email: 'alinatovstokor.dev@gmail.com',
+            password: bcrypt.hashSync('Artem15061989', 8),
+            isAdmin: false
+        },
+        {
+            name:'Natalia',
+            email: 'tovstokornatalia.dev@gmail.com',
+            password: bcrypt.hashSync('Filip2007', 8),
+            isAdmin: true
+        }
+    ],
     parfums : [
         {
             _id: 1,
