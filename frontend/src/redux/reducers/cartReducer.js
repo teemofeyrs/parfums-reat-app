@@ -16,12 +16,11 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
             qty
         }
     })
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) ;
 }
-const initialState = {
-    cartItems: []
-}
+
 /* reducer */
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = { cartItems: [] }, action) => {
     switch (action.type){
         case ADD_ITEM_TO_CART:
             const item = action.payload;
