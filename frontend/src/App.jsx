@@ -4,6 +4,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import {useSelector} from "react-redux";
 import CartScreen from "./screens/CartScreen";
+import SignInScreen from "./screens/SignInScreen";
 
 function App(props) {
 
@@ -25,6 +26,7 @@ function App(props) {
                     </div>
                 </header>
                 <main>
+                    <Route path="/singin" component={SignInScreen}/>
                     <Route path="/cart/:id?" component={CartScreen}/>
                     <Route path="/" component={HomeScreen} exact/>
                     <Route path="/product/:id" component={ProductScreen}/>

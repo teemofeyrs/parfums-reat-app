@@ -16,14 +16,13 @@ const data = {
         },
         {
             name:'Natalia',
-            email: 'tovstokornatalia.dev@gmail.com',
+            email: 'tovstokornatalia@gmail.com',
             password: bcrypt.hashSync('Filip2007', 8),
             isAdmin: true
         }
     ],
     parfums : [
         {
-            _id: 1,
             name: 'Original  Armani Si edp 100ml W ',
             shotName: 'Armani Si edp',
             brand: 'Armani',
@@ -35,7 +34,6 @@ const data = {
             rating: 4.0
         },
         {
-            _id: 2,
             name: 'Тестер Armani Acqua Di Gio (100/M/edt)',
             shotName: 'Armani Acqua Di Gio',
             brand: 'Armani',
@@ -47,7 +45,6 @@ const data = {
             rating: 4.8
         },
         {
-            _id: 3,
             name: 'Тестер Azzaro Chrome (100/M/EDT)',
             shotName: 'Azzaro Chrome',
             brand: 'Azzaro',
@@ -59,7 +56,6 @@ const data = {
             rating: 3.3
         },
         {
-            _id: 4,
             name: 'Тестер Azzaro Mademoiselle Leau Tres Belle  (90/W/EDT)',
             shotName: 'Azzaro Mademoiselle Leau',
             brand: 'Azzaro',
@@ -71,7 +67,6 @@ const data = {
             rating: 2.7
         },
         {
-            _id: 5,
             name: 'Original Calvin Klein euphoria men 100ml M edit',
             shotName: 'Calvin Klein euphoria',
             brand: 'Calvin Klein',
@@ -83,7 +78,6 @@ const data = {
             rating: 4.5
         },
         {
-            _id: 6,
             name: 'Original Calvin Klein euphoria women 100ml edp',
             shotName: 'Calvin Klein euphoria',
             brand: 'Calvin Klein',
@@ -95,7 +89,6 @@ const data = {
             rating: 5
         },
         {
-            _id: 7,
             name: 'Тестер Calvin Klein Deep Euphoria women (100/W/EDP)',
             shotName: 'Calvin Klein Deep Euphoria',
             brand: 'Calvin Klein',
@@ -107,7 +100,6 @@ const data = {
             rating: 3.6
         },
         {
-            _id: 8,
             name: 'Original Chanel Allure Homme Sport 100ml edt M',
             shotName: 'Chanel Allure Homme Sport',
             brand: 'Chanel',

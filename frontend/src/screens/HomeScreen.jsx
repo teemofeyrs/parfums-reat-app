@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Product from "../components/product";
-import * as axios from "axios";
 import LoadingBox from "../components/LoadindBox";
 import MessageBox from "../components/MessageBox";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,7 +10,7 @@ const ProductScreen = (props) => {
     const {loading, parfums, error} = productsList;
     const dispatch = useDispatch();
     useEffect(() => {
-       dispatch(listProduct())
+        dispatch(listProduct())
     }, [])
     // eslint-disable-next-line array-callback-return
     return (

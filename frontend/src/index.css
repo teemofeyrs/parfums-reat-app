@@ -92,12 +92,12 @@ footer span
 /* common*/
 h1
 {
-  font-size: 1.8rem;
+  font-size: 2.8rem;
   font-weight: bold;
 }
 h2
 {
-  font-size: 1.4rem;
+  font-size: 2.4rem;
   font-weight: bold;
 }
 ul{
@@ -164,6 +164,24 @@ button.block
 {
   width: 100%;
 }
+
+/* form */
+form{
+  max-width: 60rem;
+  margin: 0 auto;
+}
+form > div
+{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+form label
+{
+  margin: 1rem 0;
+  display: block;
+}
+
 
 .row
 {
