@@ -2,14 +2,21 @@ import React from 'react';
 import {BrowserRouter, Link, Route} from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import CartScreen from "./screens/CartScreen";
 import SignInScreen from "./screens/SignInScreen";
+import {singOut} from "./redux/reducers/SingInReducer";
 
 function App(props) {
 
-    const cart = useSelector(state => (state.cart))
+    const cart = useSelector(state => (state.cart));
     const {cartItems} = cart;
+    const auth = useSelector(state => state.auth);
+    const {userInfo} = auth;
+    const dispatch = useDispatch();
+    const singOutHandler = () => {
+        dispatch(singOut)
+    }
     return (
         <BrowserRouter>
             <div className='grid-container'>
@@ -22,7 +29,17 @@ function App(props) {
                         <Link to='/cart'>Cart
                             {cartItems.length > 0 ? (<span className='badge'>{cartItems.length}</span>) : null}
                         </Link>
-                        <Link to='/singin'>Sign In</Link>
+                        {
+                            userInfo ? (
+                                <div className='dropdown'>
+                                    <Link to='/'>{userInfo.name} <i className='fa fa-cart-down'></i></Link>
+                                    <ul className='dropdown-content'>
+                                        <Link to='#sinout' onClick={singOutHandler}>Выйти</Link>
+                                    </ul>
+                                </div>
+                            ) : ( <Link to='/singin'>Sign In</Link>)
+                        }
+
                     </div>
                 </header>
                 <main>

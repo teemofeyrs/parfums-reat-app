@@ -9,6 +9,7 @@ const userRouter = express.Router();
 
 
 userRouter.get('/seed', expressAsyncHandler(async(req, res)=>{
+    await User.remove({})
     const createdUsers = await User.insertMany(data.users);
     res.send({createdUsers})
 }))
@@ -19,6 +20,7 @@ userRouter.post('/singin', expressAsyncHandler(async(req, res)=>{
         if (bcrypt.compareSync(req.body.password, user.password)){
             res.send({
                 _id: user._id,
+                name: user.name,
                 email: user.email,
                 password: user.password,
                 isAdmin: user.isAdmin,
@@ -26,7 +28,9 @@ userRouter.post('/singin', expressAsyncHandler(async(req, res)=>{
             });
         return
         }
+    }else{
+        res.status(401).send({message: 'Неправильное имя или пароль...'})
     }
-    res.status(401).send({message: 'Неправильное имя или пароль...'})
+
 }))
 export default userRouter;
