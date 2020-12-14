@@ -186,7 +186,7 @@ form label
 .row
 {
   margin: 0;
-  padding: 1rem;
+  /*padding: 1rem;*/
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -272,6 +272,13 @@ img.medium
 }
 
 /* alert */
+.loading
+{
+  display: block!important;
+}
+.alert-info{
+  color: #f0c040;
+}
 .success
 {
   color: #20a020;
@@ -295,4 +302,29 @@ img.medium
 {
   color: #a02020;
   background-color: #ffe0e0e0;
+}
+
+/* dropdown*/
+
+.dropdown{
+  display: inline-block;
+  position: relative;
+}
+.dropdown i.fa
+{
+  color: #ffffff;
+}
+.dropdown-content
+{
+  min-width: 10rem;
+  background-color: #203040;
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 0.2rem;
+  padding: 1rem;
+}
+.dropdown:hover .dropdown-content
+{
+  display: block;
 }

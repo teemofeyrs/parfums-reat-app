@@ -4,6 +4,7 @@ import productReducer from "./reducers/productReducer";
 import productDetailsReducer from "./reducers/productDetailsReducer";
 import cartReducer from "./reducers/cartReducer";
 import SingInReducer from "./reducers/SingInReducer";
+import RegisterReducer from "./reducers/RegisterReducer";
 
 const initState = {
     auth: {
@@ -19,6 +20,7 @@ const reducers = combineReducers({
     productDetails : productDetailsReducer,
     cart: cartReducer,
     auth: SingInReducer,
+    registerUser: RegisterReducer,
 });
 
 const store = createStore(reducers, initState,  composeEnhancers(applyMiddleware(thunk)))

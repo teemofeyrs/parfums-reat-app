@@ -20,11 +20,11 @@ const SignInScreen = (props) => {
         e.preventDefault();
         dispatch(singIn(email,password))
     }
-    /*useEffect(()=>{
+    useEffect(()=>{
         if(userInfo){
             props.history.push(redirect)
         }
-    },[props.history, redirect, userInfo]);*/
+    },[props.history, redirect, userInfo]);
     return (
         <div>
 
@@ -33,7 +33,7 @@ const SignInScreen = (props) => {
                     loading ? <LoadingBox/> : error ? <MessageBox variant='danger'>{error}</MessageBox> : null
                 }
                 <div>
-                    <h2>Регистрация</h2>
+                    <h2>Вход</h2>
                 </div>
 
                 <div>
@@ -51,7 +51,7 @@ const SignInScreen = (props) => {
                     <button type='submit' className='primary block'>Войти</button>
                 </div>
                 <div>
-                    Новый пользователь { '? '} <Link to='/register'>Создать аккаунт</Link>
+                    Новый пользователь { '? '} <Link to={`/register?redirect=${redirect}`}>Создать аккаунт</Link>
                 </div>
             </form>
         </div>

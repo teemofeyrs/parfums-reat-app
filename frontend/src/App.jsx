@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import CartScreen from "./screens/CartScreen";
 import SignInScreen from "./screens/SignInScreen";
 import {singOut} from "./redux/reducers/SingInReducer";
+import RegisterScreen from "./screens/RegisterScreen";
 
 function App(props) {
 
@@ -15,7 +16,8 @@ function App(props) {
     const {userInfo} = auth;
     const dispatch = useDispatch();
     const singOutHandler = () => {
-        dispatch(singOut)
+        dispatch(singOut())
+        props.history.push('/')
     }
     return (
         <BrowserRouter>
@@ -32,18 +34,19 @@ function App(props) {
                         {
                             userInfo ? (
                                 <div className='dropdown'>
-                                    <Link to='/'>{userInfo.name} <i className='fa fa-cart-down'></i></Link>
+                                    <Link to='/'>{userInfo.name} <i className="fa fa-caret-down" aria-hidden="true"></i></Link>
                                     <ul className='dropdown-content'>
                                         <Link to='#sinout' onClick={singOutHandler}>Выйти</Link>
                                     </ul>
                                 </div>
-                            ) : ( <Link to='/singin'>Sign In</Link>)
+                            ) : ( <Link to='/signin'>Sign In</Link>)
                         }
 
                     </div>
                 </header>
                 <main>
-                    <Route path="/singin" component={SignInScreen}/>
+                    <Route path="/signin" component={SignInScreen}/>
+                    <Route path="/register" component={RegisterScreen}/>
                     <Route path="/cart/:id?" component={CartScreen}/>
                     <Route path="/" component={HomeScreen} exact/>
                     <Route path="/product/:id" component={ProductScreen}/>
