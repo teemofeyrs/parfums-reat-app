@@ -28,11 +28,11 @@ const RegisterScreen = (props) => {
             dispatch(register(name,email,password))
         }
     }
-  /*  useEffect(()=>{
+    useEffect(()=>{
         if(userInfo){
             props.history.push(redirect)
         }
-    },[props.history, redirect, userInfo]);*/
+    },[props.history, redirect, userInfo]);
     return (
         <div>
 

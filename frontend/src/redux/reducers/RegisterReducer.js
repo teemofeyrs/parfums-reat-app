@@ -26,7 +26,7 @@ export const register = (name, email, password) => async (dispatch) => {
 
 
 /* reducer */
-const RegisterReducer = (state= {userInfo: {}}, action) => {
+const RegisterReducer = (state= {userInfo: null}, action) => {
     switch (action.type) {
         case USER_REGISTER_REQUEST: return {
             loading: true

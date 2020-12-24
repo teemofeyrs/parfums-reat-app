@@ -7,6 +7,7 @@ import CartScreen from "./screens/CartScreen";
 import SignInScreen from "./screens/SignInScreen";
 import {singOut} from "./redux/reducers/SingInReducer";
 import RegisterScreen from "./screens/RegisterScreen";
+import ShippingScreen from "./screens/ShippingScreen";
 
 function App(props) {
 
@@ -15,9 +16,10 @@ function App(props) {
     const auth = useSelector(state => state.auth);
     const {userInfo} = auth;
     const dispatch = useDispatch();
+
+
     const singOutHandler = () => {
         dispatch(singOut())
-        props.history.push('/')
     }
     return (
         <BrowserRouter>
@@ -36,7 +38,7 @@ function App(props) {
                                 <div className='dropdown'>
                                     <Link to='/'>{userInfo.name} <i className="fa fa-caret-down" aria-hidden="true"></i></Link>
                                     <ul className='dropdown-content'>
-                                        <Link to='#sinout' onClick={singOutHandler}>Выйти</Link>
+                                        <Link to='/signin' onClick={singOutHandler}>Выйти</Link>
                                     </ul>
                                 </div>
                             ) : ( <Link to='/signin'>Sign In</Link>)
@@ -48,6 +50,7 @@ function App(props) {
                     <Route path="/signin" component={SignInScreen}/>
                     <Route path="/register" component={RegisterScreen}/>
                     <Route path="/cart/:id?" component={CartScreen}/>
+                    <Route path="/shipping" component={ShippingScreen}/>
                     <Route path="/" component={HomeScreen} exact/>
                     <Route path="/product/:id" component={ProductScreen}/>
                 </main>

@@ -23,11 +23,12 @@ export const singIn = (email,password) => async (dispatch) => {
     }
 }
 export const singOut = () => (dispatch,getState) => {
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('cartItems');
    dispatch({
        type: USER_LOG_OUT
    })
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('cartItems');
+    document.location.href = '/signin';
 }
 
 

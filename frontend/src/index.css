@@ -328,3 +328,19 @@ img.medium
 {
   display: block;
 }
+/* CheckoutSteps */
+
+.progressBar>div
+{
+  margin-top: 1rem;
+  flex: 1;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-top: 0.3rem solid #c0c0c0;
+  color: #c0c0c0
+}
+.progressBar div.active
+{
+  color: #f08000;
+  border-top: 0.5rem solid #f08000;
+}
