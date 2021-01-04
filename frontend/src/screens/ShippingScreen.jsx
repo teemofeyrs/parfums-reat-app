@@ -1,29 +1,35 @@
-import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import LoadingBox from "../components/LoadindBox";
 import MessageBox from "../components/MessageBox";
 import CheckoutSteps from "../components/CheckoutSteps";
+import {setAddress, setBranches, setCities} from "../redux/reducers/ShippingReducer";
 
 
 const ShippingScreen = (props) => {
     const [city, setCity] = useState('');
     const [numberBranch, setNumberBranch] = useState('');
-    const shippingAddress = useSelector(state => state.shippingAddress);
-    const {address, loading, error} = shippingAddress;
-    const dispatch = useDispatch();
+    const {address, cities, branches, loading, error} = useSelector(state => state.shippingAddress);
+    const {userInfo} = useSelector(state => state.auth);
+    if(!userInfo){
+        props.history.push('/signin')
+    }
 
+    const dispatch = useDispatch();
     const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
     const singInHandler = (e) => {
         e.preventDefault();
-
+        dispatch(setAddress({city, numberBranch}))
     }
-    /*useEffect(()=>{
-        if(userInfo){
-            props.history.push(redirect)
+    useEffect(()=>{
+        if(cities.length === 0){
+            dispatch(setCities())
         }
-    },[props.history, redirect, userInfo]);*/
+       if(cities.some(el => el.Description === city)) {
+           dispatch(setBranches(city))
+       }
+    },[city]);
     return (
         <div>
             <CheckoutSteps step1 step2/>
@@ -35,14 +41,21 @@ const ShippingScreen = (props) => {
                     <h2>Адрес доставки</h2>
                 </div>
                 <div>
-                    <label htmlFor='city'>Выберите ваш город</label>
-                    <input type="text" name="city" value={city}
-                           placeholder='Введите ваш город' onChange={event => setCity(event.target.value)}/>
+                    <label htmlFor='city'>Выберите ваш город <small>( введите первые буквы...)</small></label>
+                    <input type='text' list='city' name='city' value={city}
+                           placeholder='Введите ваш город' onChange={event => setCity(event.target.value)} required/>
+                    <datalist id='city'>
+                        {cities ? cities.map(city => ( <option key={city.Ref} value={city.Description}/>)): null}
+                    </datalist>
                 </div>
                 <div>
                     <label htmlFor='numberBranch'>Выберите отделение</label>
-                    <input type="text" name="numberBranch" value={numberBranch}
-                           placeholder='Выберите отделение' onChange={event => setNumberBranch(event.target.value)}/>
+                    <input type="text" list='numberBranch' name="numberBranch" value={numberBranch}
+                           placeholder='Выберите отделение' onChange={event => setNumberBranch(event.target.value)}
+                           disabled={!city} required/>
+                    <datalist id='numberBranch'>
+                        {branches ? branches.map(branch => ( <option key={branch.Description} value={branch.Description}/>)) : null}
+                    </datalist>
                 </div>
                 <div>
                     <label />
