@@ -3,12 +3,15 @@ import {addToCart, removeFromCart} from "../redux/reducers/cartReducer";
 import {useDispatch, useSelector} from "react-redux";
 import MessageBox from "../components/MessageBox";
 import {Link} from "react-router-dom";
+import {toNumUSD} from "../utils";
 
 const CartScreen = (props) => {
     const productId = props.match.params.id
     const qty = props.location.search ? Number(props.location.search.split('=')[1]) : 1;
     const dispatch = useDispatch();
     const cart = useSelector(state => (state.cart))
+    const {usd} = useSelector(state => (state.productsList))
+    const currency = toNumUSD(usd.rate)
     const {cartItems} = cart;
     const onDeleteCartHandler = (id) => {
         dispatch(removeFromCart(id))
@@ -48,7 +51,7 @@ const CartScreen = (props) => {
                                                 </select>
                                             </div>
                                             <div>
-                                                <p>Цена: {item.price}</p>
+                                                <p>Цена: {currency*item.price}</p>
                                             </div>
                                             <div>
                                                 <button onClick={()=> { onDeleteCartHandler(item.product)}}>Удалить</button>
@@ -68,7 +71,7 @@ const CartScreen = (props) => {
                         <h2>Общее количество : {cartItems.reduce((a , c) => a + c.qty , 0)} шт.</h2>
                     </li>
                     <li>
-                        <h2>Общее сумма : {cartItems.reduce((a , c) => a + c.price * c.qty , 0)} грн.</h2>
+                        <h2>Общее сумма : {cartItems.reduce((a , c) => a + (currency*c.price) * c.qty , 0)} грн.</h2>
                     </li>
                     <li>
                         <button type='button' className='primary block' onClick={checkoutHandler} disabled={cartItems.length === 0}>

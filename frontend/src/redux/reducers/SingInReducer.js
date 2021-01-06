@@ -25,6 +25,7 @@ export const singIn = (email,password) => async (dispatch) => {
 export const singOut = () => (dispatch,getState) => {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('cartItems');
+    localStorage.removeItem('address');
    dispatch({
        type: USER_LOG_OUT
    })

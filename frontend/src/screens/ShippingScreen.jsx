@@ -3,26 +3,27 @@ import {useDispatch, useSelector} from "react-redux";
 import LoadingBox from "../components/LoadindBox";
 import MessageBox from "../components/MessageBox";
 import CheckoutSteps from "../components/CheckoutSteps";
-import {setAddress, setBranches, setCities} from "../redux/reducers/ShippingReducer";
+import {saveAddress, setBranches, setCities} from "../redux/reducers/ShippingReducer";
 
 
 const ShippingScreen = (props) => {
-    const [city, setCity] = useState('');
-    const [numberBranch, setNumberBranch] = useState('');
+
     const {address, cities, branches, loading, error} = useSelector(state => state.shippingAddress);
     const {userInfo} = useSelector(state => state.auth);
     if(!userInfo){
         props.history.push('/signin')
     }
-
+    const [city, setCity] = useState(address.city);
+    const [numberBranch, setNumberBranch] = useState('');
+    const [fullName, setFullName] = useState(address.fullName);
+    const [phone, setPhone] = useState(address.phone);
     const dispatch = useDispatch();
-    const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
-
     const singInHandler = (e) => {
         e.preventDefault();
-        dispatch(setAddress({city, numberBranch}))
+        dispatch(saveAddress({fullName, phone, city, numberBranch}));
+        props.history.push('/payment')
     }
-    useEffect(()=>{
+    useEffect(() => {
         if(cities.length === 0){
             dispatch(setCities())
         }
@@ -41,9 +42,22 @@ const ShippingScreen = (props) => {
                     <h2>Адрес доставки</h2>
                 </div>
                 <div>
+                    <label htmlFor="fullName">Имя и фамилия Получателя</label>
+                    <input type='text'  name='fullName' value={fullName}
+                           placeholder='Введите ммя и фамилию получателя' onChange={event => { setFullName(event.target.value)}} required/>
+                </div>
+                <div>
+                    <label htmlFor="phone">Ваш телефон</label>
+                    <input type='text'  name='phone' value={phone}
+                           placeholder='Введите Ваш телефон в виде +380...' onChange={event => { setPhone(event.target.value)}} required/>
+                </div>
+                <div>
                     <label htmlFor='city'>Выберите ваш город <small>( введите первые буквы...)</small></label>
                     <input type='text' list='city' name='city' value={city}
-                           placeholder='Введите ваш город' onChange={event => setCity(event.target.value)} required/>
+                           placeholder='Введите ваш город' onChange={event => {
+                               setNumberBranch('')
+                        setCity(event.target.value)
+                    }} required/>
                     <datalist id='city'>
                         {cities ? cities.map(city => ( <option key={city.Ref} value={city.Description}/>)): null}
                     </datalist>
@@ -54,7 +68,7 @@ const ShippingScreen = (props) => {
                            placeholder='Выберите отделение' onChange={event => setNumberBranch(event.target.value)}
                            disabled={!city} required/>
                     <datalist id='numberBranch'>
-                        {branches ? branches.map(branch => ( <option key={branch.Description} value={branch.Description}/>)) : null}
+                        {branches ? branches.map(branch => ( <option key={branch.Ref} value={branch.Description}/>)) : null}
                     </datalist>
                 </div>
                 <div>

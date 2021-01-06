@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import Rating from "../components/Rating";
 import {Link} from "react-router-dom";
-import * as axios from "axios";
 import LoadingBox from "../components/LoadindBox";
 import MessageBox from "../components/MessageBox";
 import {useDispatch, useSelector} from "react-redux";
 import {detailsProduct} from "../redux/reducers/productDetailsReducer";
+import {toNumUSD} from "../utils";
 
 const ProductScreen = (props) => {
     const productId = props.match.params.id
     const [qty, setQty] = useState(1)
-    const productDetails = useSelector(state => state.productDetails)
+    const productDetails = useSelector(state => state.productDetails);
+    const {usd} = useSelector(state => state.productsList);
     const {loading, product, error} = productDetails;
     const dispatch = useDispatch();
+    const currency = toNumUSD(usd.rate)
     useEffect(() => {
         dispatch(detailsProduct(productId))
     }, [productId])
@@ -39,7 +41,7 @@ const ProductScreen = (props) => {
                                         <Rating rating={product.rating}/>
                                     </li>
                                     <li>
-                                        {product.price}
+                                        {currency*product.price}
                                     </li>
                                     <li>
                                         <p>{product.description}</p>
@@ -52,7 +54,7 @@ const ProductScreen = (props) => {
                                         <li>
                                             <div className="row">
                                                 <div>Цена</div>
-                                                <div className="price">{product.price}</div>
+                                                <div className="price">{currency*product.price}</div>
                                             </div>
                                         </li>
                                         <li>

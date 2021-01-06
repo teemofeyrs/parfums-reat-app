@@ -4,8 +4,14 @@ import * as axios from "axios";
 const PRODUCT_LIST_REQUEST = 'PRODUCT_LIST_REQUEST';
 const PRODUCT_LIST_SUCCESS = 'PRODUCT_LIST_SUCCESS';
 const PRODUCT_LIST_FAIL = 'PRODUCT_LIST_FAIL';
-
+const SET_CURRENCY = 'SET_CURRENCY';
 /*actions*/
+export const getCurrency = () => async (dispatch) => {
+    const {data} = await axios('/api/products/usd');
+    dispatch({
+        type: SET_CURRENCY, payload: data
+    })
+}
 export const listProduct = () => async (dispatch) => {
     dispatch({
         type: PRODUCT_LIST_REQUEST,
@@ -28,12 +34,17 @@ const productReducer = (state = {
     parfums: []
 }, action) => {
     switch (action.type) {
+        case SET_CURRENCY:
+            return {
+                ...state, usd: action.payload
+            }
         case PRODUCT_LIST_REQUEST:
         return {
             loading:true
         }
         case PRODUCT_LIST_SUCCESS:
             return {
+                ...state,
             loading: false, parfums: action.payload
         }
         case PRODUCT_LIST_FAIL:

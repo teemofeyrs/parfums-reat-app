@@ -15,9 +15,14 @@ const initState = {
         cartItems : localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
     },
     shippingAddress: {
+        address: localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : {
+            fullName: 'f',
+            phone: 'f',
+            city: ''
+        },
         cities: localStorage.getItem('cities') ? JSON.parse(localStorage.getItem('cities')) : [],
         branches: localStorage.getItem('branches') ? JSON.parse(localStorage.getItem('branches')) : [],
-        address: localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : {},
+
     }
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -30,6 +35,5 @@ const reducers = combineReducers({
     shippingAddress: ShippingReducer,
 
 });
-
 const store = createStore(reducers, initState,  composeEnhancers(applyMiddleware(thunk)))
 export default store;

@@ -3,6 +3,7 @@ import * as axios from "axios";
 /* constants */
 const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
 const DELETE_ITEM_FROM_CART = 'DELETE_ITEM_FROM_CART';
+const SET_PAYMENT_METHOD = 'SET_PAYMENT_METHOD';
 /* thunk */
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
     const {data} = await axios.get(`/api/products/${productId}`);
@@ -24,6 +25,11 @@ export const removeFromCart = (productId) => (dispatch, getState) => {
     })
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) ;
 }
+export const setPayment = (payment) => async (dispatch) => {
+    dispatch({
+        type: SET_PAYMENT_METHOD, payload: payment
+    })
+}
 /* reducer */
 const cartReducer = (state = { cartItems: [] }, action) => {
     switch (action.type){
@@ -42,6 +48,10 @@ const cartReducer = (state = { cartItems: [] }, action) => {
         case DELETE_ITEM_FROM_CART:
             return {
                 ...state, cartItems: state.cartItems.filter( i => i.product !== action.payload)
+            }
+        case SET_PAYMENT_METHOD:
+            return {
+                ...state, paymentMethod: action.payload
             }
         default:
             return state;

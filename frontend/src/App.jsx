@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Link, Route} from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
@@ -8,6 +8,9 @@ import SignInScreen from "./screens/SignInScreen";
 import {singOut} from "./redux/reducers/SingInReducer";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingScreen from "./screens/ShippingScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import PlaceorderScreen from "./screens/PlaceorderScreen";
+
 
 function App(props) {
 
@@ -16,8 +19,6 @@ function App(props) {
     const auth = useSelector(state => state.auth);
     const {userInfo} = auth;
     const dispatch = useDispatch();
-
-
     const singOutHandler = () => {
         dispatch(singOut())
     }
@@ -51,6 +52,8 @@ function App(props) {
                     <Route path="/register" component={RegisterScreen}/>
                     <Route path="/cart/:id?" component={CartScreen}/>
                     <Route path="/shipping" component={ShippingScreen}/>
+                    <Route path="/payment" component={PaymentScreen}/>
+                    <Route path="/placeorder" component={PlaceorderScreen}/>
                     <Route path="/" component={HomeScreen} exact/>
                     <Route path="/product/:id" component={ProductScreen}/>
                 </main>
