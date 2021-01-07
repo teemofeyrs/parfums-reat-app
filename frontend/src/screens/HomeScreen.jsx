@@ -7,7 +7,10 @@ import {getCurrency, listProduct} from "../redux/reducers/productReducer";
 
 const ProductScreen = (props) => {
     const productsList = useSelector((state) => state.productsList);
-    const {loading, parfums, error, usd} = productsList;
+    let {loading, parfums, error, usd} = productsList;
+    if(!usd){
+        usd = {rate: 28.4}
+    }
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCurrency())
