@@ -13,7 +13,9 @@ const ProductScreen = (props) => {
     }
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getCurrency())
+        while (!usd){
+            dispatch(getCurrency())
+        }
         dispatch(listProduct())
     }, [])
     // eslint-disable-next-line array-callback-return
